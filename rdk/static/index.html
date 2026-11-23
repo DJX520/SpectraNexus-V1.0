@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark"><title>LABOS / V5.2 · PURPLE & GOLD</title><link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="/static/showcase.css"><link rel="stylesheet" href="/static/purple-gold.css"></head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+<div class="logo"><div class="logoicon">L<span>5</span></div><div><strong>LABOS</strong><small>WIRELESS RESEARCH STATION</small></div></div>
+<div class="sideinfo">BLACKDECK <span>×</span> RDK X5<br><small>ROYAL STATION / V5.2</small></div>
+<nav aria-label="主导航">
+<a href="#overview" class="nav current" data-page="overview"><b>01</b> 总览与采集</a>
+<a href="#signals" class="nav" data-page="signals"><b>02</b> 无线数据分析</a>
+<a href="#sessions" class="nav" data-page="sessions"><b>03</b> 实验管理</a>
+<a href="#assistant" class="nav" data-page="assistant"><b>04</b> AI 分析助手</a>
+<a href="#showcase" class="nav" data-page="showcase"><b>05</b> 全屏演示驾驶舱</a>
+<a href="#settings" class="nav" data-page="settings"><b>06</b> 部署与诊断</a>
+</nav><div class="sidebottom"><div class="livepoint"></div> 本地优先 · 无主动攻击指令 <small>设备命令均为受控测量</small></div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="crumb">RESEARCH / <span id="crumb">OVERVIEW</span></div><div class="rightbar"><span id="sourceLabel" class="pill dim">无数据</span><span class="time" id="clock"></span><span class="pill" id="linkState">USB 未连接</span></div></header>
+<section class="page active" id="overview"><div class="eyebrow">EDGE LABORATORY / SYSTEM OVERVIEW</div><h1>无线实验，<em>有据可查。</em></h1>
+<p class="intro">Cardputer-Adv 负责现场采集和离线 AI；RDK X5 提供协议分析、实验数据库与可视化。本页面不会自动扫描外部设备。</p>
+<div class="statgrid"><article class="stat"><span>设备连接</span><strong id="statLink">—</strong><small id="statPort">暂无连接</small></article><article class="stat"><span>记录总数</span><strong id="statCount">0</strong><small>来自当前选定会话</small></article><article class="stat"><span>RF / 均值</span><strong id="statRf">—</strong><small>dBm，未校准强度</small></article><article class="stat"><span>当前会话</span><strong class="smaller" id="statSession">未选择</strong><small>可在实验管理页新建</small></article></div>
+<div class="twocol"><article class="panel"><div class="paneltop"><span>01 / DEVICE CONTROL</span><span class="label">READ ONLY</span></div><h2>Cardputer-Adv 接入</h2>
+<p>USB CDC / LAB5 协议。连接后可读取真实状态或请求一次受控扫描。</p><div class="buttonrow"><button id="btnHello" class="primary">握手检查</button><button id="btnInfo">读取设备状态</button></div>
+<div id="deviceInfo" class="statuslog">尚未检测到真实设备。请先在 Cardputer 烧录 BlackDeck V2.1 并连接 USB。</div>
+<div class="divider"></div><h3>快速采集</h3>
+<div class="actiontiles"><button data-scan="wifi"><span>WiFi</span><small>AP / 信道 / RSSI</small></button><button data-scan="ble"><span>BLE</span><small>广播 / 地址 / RSSI</small></button><button data-scan="rf"><span>Sub-GHz</span><small>433.92 MHz / RSSI</small></button><button data-scan="nfc"><span>NFC</span><small>NFC-A / 标签识别</small></button></div>
+<div class="buttonrow"><button data-scan="rf315">315 MHz 接收</button><button data-scan="rf868">868 MHz 接收</button><button data-scan="rf915">915 MHz 接收</button></div>
+<p class="hint">切换频段前请安装对应天线。设备仅接收，不执行射频发射。NFC 为一次性读卡，须将自己的测试标签靠近扩展帽。RF 是接收侧 RSSI 采样，不是宽带 SDR。</p></article>
+<article class="panel"><div class="paneltop"><span>02 / LATEST ACQUISITION</span><span id="sampleTag" class="label">NO DATA</span></div><h2>最近一次采集结果</h2><div id="latestMeasurement" class="statuslog tall">采集后将展示实际数量和数据来源。</div><div class="buttonrow"><button id="btnDemo">载入标记的模拟样本</button><button id="btnRefresh">刷新统计</button></div><p class="hint">模拟数据始终标记 simulated，不能用作实测成果。</p></article></div></section>
+<section class="page" id="signals"><div class="eyebrow">MEASUREMENT / EVIDENCE</div><h1>无线信号<em>分析台。</em></h1><p class="intro">WiFi、BLE 和 CC1101 的测量曲线按来源和会话归档；统计离群值不等同于安全攻击判断。</p>
+<div class="panel"><div class="paneltop"><span>03 / TIMELINE ANALYSIS</span><span id="chartType" class="label">RF RSSI</span></div><div class="buttonrow filters"><button class="filter active" data-kind="rf">RF RSSI</button><button class="filter" data-kind="wifi">WiFi RSSI</button><button class="filter" data-kind="ble">BLE RSSI</button><button id="btnChartRefresh" class="push">更新数据</button></div><canvas id="lineChart" width="1000" height="300" role="img" aria-label="RSSI 样本时序图"></canvas><p class="hint">横轴为采样序号，纵轴单位 dBm；混合采样批次不用于校准拟合。</p></div>
+<div class="twocol"><article class="panel"><div class="paneltop"><span>04 / CHANNEL DISTRIBUTION</span></div><h2>WiFi 信道计数</h2><div id="channels" class="bars"></div></article><article class="panel"><div class="paneltop"><span>05 / STATISTICAL FLAGS</span></div><h2>RF 离群点提示</h2><div id="anomalies" class="statuslog tall">需要至少 8 条同批次 RF 样本。</div></article></div>
+<div class="panel"><div class="paneltop"><span>06 / DATA TABLE</span></div><h2>最近测量记录</h2><div class="tablewrap"><table><thead><tr><th>UTC 时间</th><th>协议</th><th>来源</th><th>批次 ID</th><th>记录数据</th></tr></thead><tbody id="sampleRows"><tr><td colspan="5">暂无数据</td></tr></tbody></table></div></div>
+<div class="panel"><div class="paneltop"><span>07 / DEVICE OBSERVATIONS</span><span class="label">PSEUDONYMOUS</span></div><h2>观测设备档案（匿名化）</h2><p>同一协议内的地址/UID 使用 RDK 本地随机盐生成匿名标识。不同协议之间不会自动判定为同一设备。</p><div class="tablewrap"><table><thead><tr><th>匿名档案</th><th>协议</th><th>次数</th><th>上次 RSSI</th><th>最近观察</th></tr></thead><tbody id="profileRows"><tr><td colspan="5">暂无设备标识记录</td></tr></tbody></table></div></div>
+<div class="panel"><div class="paneltop"><span>08 / OFFLINE DATASET</span><span class="label">USER UPLOAD</span></div><h2>导入 CSV / PCAP</h2><p>使用 LabOS V4 的离线解析器进行统计，不监听周围网络。只保存分析摘要和 SHA-256，不默认存原始文件。</p><div class="buttonrow"><input type="file" id="inputFile" accept=".pcap,.csv"><button id="btnImport" class="primary">导入并分析</button></div><div class="statuslog" id="importResult">未导入文件。</div></div></section>
+<section class="page" id="sessions"><div class="eyebrow">REPRODUCIBILITY / TRACEABILITY</div><h1>实验会话<em>与记录。</em></h1><p class="intro">一次实验包含采集批次、来源、时间戳、配置和测量值。可以导出 CSV、JSON，或打印实验摘要。</p>
+<div class="twocol"><article class="panel"><div class="paneltop"><span>08 / SESSION CONTROL</span></div><h2>开始新实验</h2><label for="sessionName">实验名称</label><input id="sessionName" placeholder="例如：433MHz 室内距离测试" maxlength="80"><label for="sessionNote">测试条件说明</label><textarea id="sessionNote" rows="3" maxlength="500" placeholder="天线、频段、距离、环境、测试设备"></textarea><div class="buttonrow"><button id="btnNewSession" class="primary">创建实验会话</button><button id="btnEndSession">结束当前会话</button></div></article>
+<article class="panel"><div class="paneltop"><span>09 / DATA EXPORT</span></div><h2>可复现的数据导出</h2><label for="sessionSelect">筛选会话</label><select id="sessionSelect"><option value="">全部会话</option></select><div class="buttonrow"><a id="exportCsv" class="secondarybtn" href="/api/export.csv">导出 CSV</a><a id="exportJson" class="secondarybtn" href="/api/export.json">导出 JSON</a><button id="btnReport">生成报告摘要</button><a id="reportHtml" class="secondarybtn" href="/api/report.html" target="_blank" rel="noopener">打印报告</a></div><pre id="reportText" class="statuslog">等待生成。</pre></article></div><article class="panel"><div class="paneltop"><span>10 / SESSION HISTORY</span></div><div id="sessionHistory" class="history">暂无实验记录。</div></article></section>
+<section class="page" id="assistant"><div class="eyebrow">INTELLIGENCE / INTERPRETATION</div><h1>智能实验<em>分析助手。</em></h1><p class="intro">ADV 自己的离线 AI 完整保留；此处为 RDK 的数据解释助手，可选连接 RDK 本机 Ollama。AI 无权直接发送设备命令。</p>
+<div class="twocol"><article class="panel"><div class="paneltop"><span>11 / EXPERIMENT COPILOT</span><span id="aiMode" class="label">RULES</span></div><h2>结合真实测量提问</h2><textarea id="aiInput" rows="5" placeholder="例如：这批 CC1101 RSSI 结果有哪些异常？需要怎么验证？"></textarea><div class="buttonrow"><button id="btnAsk" class="primary">分析数据</button></div><pre id="aiAnswer" class="statuslog tall">助手只会解读数据库中的数据，不会代替你生成不存在的结果。</pre></article>
+<article class="panel"><div class="paneltop"><span>12 / CHINESE SPEECH</span></div><h2>可选 Whisper.cpp 语音转写</h2><p>RDK 安装 whisper.cpp 和模型后，可上传 WAV 文件进行中文识别。未安装时不影响其他功能。</p><input type="file" id="voiceFile" accept=".wav,audio/wav"><div class="buttonrow"><button id="btnVoice">转写 WAV</button><button id="btnUseVoice">用于提问</button></div><pre class="statuslog" id="voiceResult">语音服务未检测。</pre></article></div></section>
+<section class="page" id="showcase"><div class="eyebrow">VISUAL STUDIO / PRESENTATION MODE</div>
+<h1>Signal Theater <em>无线信号驾驶舱。</em></h1>
+<p class="intro">实验展示模式。画面中的环形分布仅用于可视化，无方向测量能力；来源标记区分历史记录与纯模拟动画，绝不将演示数据当作实测。</p>
+<div class="showcase-toolbar">
+  <div class="showcase-mode" role="group" aria-label="展示数据模式">
+    <button id="showEvidence" class="active" type="button">数据库记录回放</button>
+    <button id="showDemo" type="button">视觉模拟演示</button>
+  </div>
+  <div class="showcase-actions"><button id="showRefresh" type="button">刷新记录</button><button id="showPause" type="button">暂停动画</button><button id="showFullscreen" class="primary" type="button">全屏投影</button></div>
+</div>
+<article class="showcase-stage" id="showcaseStage">
+ <div class="stage-head"><div><span class="stage-kicker">SIGNAL INTELLIGENCE // MULTI-PROTOCOL LAB</span><h2>BLACKDECK <span>×</span> LABOS</h2></div><div class="stage-status"><span class="stage-live-dot"></span><span id="showModeText">DATABASE REPLAY</span></div></div>
+ <div class="showcase-canvas-wrap"><canvas id="showcaseCanvas" aria-label="无线信号装饰性雷达与样本强度时间线"></canvas>
+  <div class="canvas-corner left">RF / WiFi / BLE / NFC<br><span>NOT A DIRECTION FINDER</span></div>
+  <div class="canvas-corner right"><span id="showSource">NO RECORDS</span><br><span id="showPulse">—</span></div>
+ </div>
+ <div class="showcase-stats">
+  <div><small>当前证据记录</small><strong id="showCount">0</strong><span>条数据</span></div>
+  <div><small>RF RSSI 均值</small><strong id="showRssi">—</strong><span>dBm</span></div>
+  <div><small>协议类型</small><strong id="showKinds">0</strong><span>种</span></div>
+  <div><small>状态</small><strong id="showState">待加载</strong><span>本地服务</span></div>
+ </div>
+ <div class="stage-footer"><div class="stage-footer-head"><span>RECENT EVIDENCE / 近期记录</span><span>LOCAL FIRST · NO ACTIVE TRANSMISSION</span></div><div id="showEvents" class="showcase-events"><p>尚未读取历史记录。</p></div></div>
+ <div class="showcase-watermark" id="showWatermark">NO MEASUREMENTS</div>
+</article>
+<div class="showcase-notes"><span>数据回放按最近存储的测量样本绘图，不等于设备正在实时采集。</span><span>模拟演示只在浏览器内生成，不写入实验数据库。</span></div>
+</section>
+<section class="page" id="settings"><div class="eyebrow">OPERATIONS / ENVIRONMENT</div><h1>设备诊断<em>与部署。</em></h1><p class="intro">当前服务默认只在 RDK 的 127.0.0.1:8080 监听。Windows 通过 SSH 隧道访问，避免未认证公网暴露。</p>
+<div class="twocol"><article class="panel"><div class="paneltop"><span>13 / BACKEND STATUS</span></div><h2>系统自检</h2><pre id="backendStatus" class="statuslog tall">正在获取…</pre><div class="buttonrow"><button id="btnStatus">刷新状态</button><button id="btnSelfTest" class="primary">USB 一键通信自检</button></div>
+<pre id="selfTestResult" class="statuslog">尚未运行通信自检。先连接 ADV 并烧录匹配固件。</pre>
+<p class="hint">自检只进行 LAB5 握手与设备信息读取，不会触发无线扫描。自检成功不等于 CC1101、NFC、BLE 均已通过实测。</p></article><article class="panel"><div class="paneltop"><span>14 / INTEGRATION RULES</span></div><h2>开发与测试边界</h2><p>基础工程不需要外置无线网卡，也不需要 BPU 推理模型。NFC 仅读取自有测试标签；CC1101 无主动发射；WiFi/BLE 只做基础发现。</p><p>单机模式保留 BlackDeck 及离线小模型。新增固件需要安装官方 M5 NFC 库，并进行实际编译与硬件验收。</p><p class="hint">RDK X5 运行 Linux；终端里使用 Bash 命令，不需要 PowerShell。</p></article></div></section>
+<footer>LABOS V5.2 · BLACKDECK × CARDPUTER-ADV × RDK X5 <span>LOCAL-FIRST / OBSERVE · ANALYZE · VERIFY</span></footer>
+</main>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="/static/app.js" defer></script><script src="/static/showcase.js" defer></script></body></html>

@@ -1,0 +1,14 @@
+安装（RDK X5 / Ubuntu 22.04）：
+  bash install_rdk.sh
+启动：
+  bash run_rdk.sh
+USB 独立自检（不执行扫描）：
+  .venv/bin/python -m labos.check_device
+一次 WiFi 扫描（明确选择后执行）：
+  .venv/bin/python -m labos.check_device --scan wifi
+运行全部自动化测试：
+  .venv/bin/python -m unittest discover -s tests -v
+
+访问地址（在 RDK 上）: http://127.0.0.1:8080
+Windows 浏览器请先建立 SSH 隧道：ssh -L 8080:127.0.0.1:8080 username@RDK_IP
+注意：请关闭 Arduino 串口监视器，避免占用 USB 串口。

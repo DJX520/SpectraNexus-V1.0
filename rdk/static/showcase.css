@@ -1,0 +1,39 @@
+/* BlackDeck × LabOS: projection-ready visual cockpit. No third-party assets. */
+#showcase .intro{max-width:960px}
+.showcase-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin:18px 0}
+.showcase-mode,.showcase-actions{display:flex;gap:8px;flex-wrap:wrap}
+.showcase-mode button{background:#0c1b25;border-color:#29445b;color:#b0c5d3}
+.showcase-mode button.active{background:#19473f;border-color:#70ead0;color:#dffff8}
+.showcase-stage{--fx:#49ead1;position:relative;isolation:isolate;overflow:hidden;border:1px solid #23555d;border-radius:18px;background:radial-gradient(ellipse at 40% 28%,#143647 0,#0a1725 48%,#060e1a 100%);box-shadow:0 13px 52px #02080e60,inset 0 0 70px #24596811}
+.showcase-stage:before{content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;opacity:.35;background-image:linear-gradient(#7bd6d70c 1px,transparent 1px),linear-gradient(90deg,#7bd6d70c 1px,transparent 1px);background-size:40px 40px}
+.stage-head{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:25px 30px 15px;gap:15px}
+.stage-kicker{color:#73e8d0;font-size:10px;letter-spacing:.19em;font-family:ui-monospace,Consolas,monospace}
+.stage-head h2{margin:6px 0 0;font-size:28px;font-weight:800;letter-spacing:.13em;color:#e4fbff;line-height:1.2}
+.stage-head h2 span{color:#46efc8}
+.stage-status{display:flex;align-items:center;gap:9px;font:11px ui-monospace,monospace;letter-spacing:.12em;color:#aff3e5;white-space:nowrap}
+.stage-live-dot{display:inline-block;width:8px;height:8px;background:#46e6bb;border-radius:50%;box-shadow:0 0 15px #46e6bb;animation:showpulse 1.8s infinite}
+@keyframes showpulse{50%{opacity:.45;box-shadow:0 0 3px #46e6bb}}
+.showcase-canvas-wrap{height:min(52vh,480px);min-height:320px;position:relative;margin:0 15px;background:linear-gradient(130deg,#06121d38,#10344c10);overflow:hidden}
+#showcaseCanvas{width:100%;height:100%;display:block}
+.canvas-corner{position:absolute;bottom:20px;font:10px/1.7 ui-monospace,Consolas,monospace;color:#9ac3cd;letter-spacing:.06em;pointer-events:none}
+.canvas-corner.left{left:18px}.canvas-corner.right{right:18px;text-align:right}
+.canvas-corner span{color:#4cd5bd}
+.showcase-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin:4px 27px 20px;border:1px solid #225160;background:#23505d}
+.showcase-stats>div{padding:13px 18px 14px;background:#0a1e2b;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.showcase-stats small{flex:0 0 100%;color:#8caebc;font-size:11px;letter-spacing:.06em}
+.showcase-stats strong{font-size:26px;font-weight:750;color:#dbfaf4;font-variant-numeric:tabular-nums}
+.showcase-stats span{font-size:11px;color:#5db8ad}
+.stage-footer{margin:0 27px 28px}
+.stage-footer-head{display:flex;justify-content:space-between;color:#76a8b0;font-size:10px;letter-spacing:.1em;border-bottom:1px solid #244854;padding-bottom:9px;gap:15px}
+.showcase-events{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding-top:12px}
+.showcase-events .event{border:1px solid #214353;background:#0c2230;border-radius:7px;padding:10px;min-width:0}
+.showcase-events .event strong{display:block;color:#bcf7e7;font-size:11px;letter-spacing:.08em}
+.showcase-events .event span{display:block;color:#8fa6b4;font:10px/1.8 ui-monospace,Consolas,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.showcase-watermark{position:absolute;top:82px;right:24px;font:10px ui-monospace,monospace;letter-spacing:.12em;color:#6c9caa;opacity:.8}
+.showcase-notes{display:flex;gap:18px;flex-wrap:wrap;padding:15px 2px;color:var(--muted);font-size:11px}
+.showcase-notes span:before{content:"◇";color:#6cd9c3;padding-right:6px}
+.showcase-stage:fullscreen{border-radius:0;overflow:auto;height:100vh}
+.showcase-stage:fullscreen .showcase-canvas-wrap{height:min(56vh,650px)}
+@media(max-width:1000px){.showcase-stats{grid-template-columns:repeat(2,1fr)}.showcase-events{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.stage-head{padding:18px}.stage-head h2{font-size:19px}.stage-kicker,.stage-status{font-size:9px}.showcase-canvas-wrap{height:290px;min-height:290px}.showcase-stats{margin:4px 12px 15px}.showcase-stats>div{padding:10px}.showcase-stats strong{font-size:20px}.showcase-events{grid-template-columns:1fr 1fr}.stage-footer{margin:0 12px 12px}.stage-footer-head{flex-wrap:wrap}.showcase-watermark{top:75px;right:10px;font-size:8px}}
+@media(prefers-reduced-motion:reduce){.stage-live-dot{animation:none}}

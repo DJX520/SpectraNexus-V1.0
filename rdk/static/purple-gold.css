@@ -1,0 +1,85 @@
+/* LABOS V5.2 / Purple × Gold: premium research dashboard. All local CSS. */
+:root{--bg:#090711;--panel:#151124;--panel2:#1d1731;--border:#342b49;--fg:#f5f1ff;--muted:#b5accb;--accent:#e5bc72;--cyan:#b59aff;--warn:#f3ca83;--radius:16px;color-scheme:dark}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(circle at 85% 9%,rgba(88,45,145,.16),transparent 34%),radial-gradient(circle at 8% 70%,rgba(139,94,168,.07),transparent 32%),var(--bg);color:var(--fg)}
+::selection{background:#7f59a9;color:white}
+button,a.secondarybtn{transition:transform .14s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease;color:var(--fg);background:#26203b;border:1px solid #4b3c64;border-radius:10px}
+button:hover,a.secondarybtn:hover{background:#35284e;border-color:#c19a69;box-shadow:0 3px 16px rgba(199,147,99,.12);transform:translateY(-1px)}
+button:active{transform:translateY(1px)}
+button.primary{background:linear-gradient(135deg,#b88951,#e6c181);border-color:#e1c58c;color:#241426;font-weight:760;box-shadow:inset 0 1px 0 #fff6,0 5px 18px #9c603d1a}
+button.primary:hover{background:linear-gradient(135deg,#d2a365,#f1cf96);color:#211128}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #edc77c;outline-offset:3px}
+input,select,textarea{background:#0d0a19;border:1px solid #493d5d;color:#f6f1ff;border-radius:10px}
+input:focus,select:focus,textarea:focus{border-color:#e1b979;box-shadow:0 0 0 3px #d4a76c19}
+input[type=file]{max-width:100%}
+.sidebar{background:linear-gradient(180deg,#191025,#100c1d 56%,#0b0915);border-right:1px solid #594165;padding-top:29px}
+.sidebar:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,#7652ac,#e0b979,#7956b5);pointer-events:none}
+.logo{margin-bottom:31px}
+.logoicon{width:41px;height:41px;background:radial-gradient(circle at 24% 15%,#49315f,#241633);border:1px solid #b58b5a;border-radius:12px;color:#fff1d9;box-shadow:0 0 22px #a777da2e}
+.logoicon span{color:#d4ad71}
+.logo strong{color:#f3ecff;font-size:16px;letter-spacing:.2em}
+.logo small{color:#ac9bc0;letter-spacing:.12em}
+.sideinfo{background:linear-gradient(135deg,#221832aa,#161024);border:1px solid #513e60;color:#d4c7e9}
+.sideinfo span{color:#d5a968}
+nav a{color:#b6a9cb;border-radius:8px}
+nav a b{color:#8c77a2}
+nav a.current,nav a:hover{background:linear-gradient(90deg,#49325b72,#251733);color:#f7d7a2;border-left-color:#e6bb79}
+nav a.current b{color:#eacb9e}
+.sidebottom{color:#d6c3e8;border-top:1px solid #41304f}
+.livepoint{background:#e0b873;box-shadow:0 0 11px #e0b8736b}
+.main{position:relative}
+.topbar{border-bottom-color:#35293d}
+.crumb{color:#a395b7;letter-spacing:.16em}
+.crumb span{color:#edc986}
+.pill{border-color:#8f6746;background:#372416;color:#f1d6a6}
+.pill.dim{background:#251b36;border-color:#4f3e68;color:#b7a7d3}
+.eyebrow{color:#e0ba76;font-size:11px;letter-spacing:.19em}
+h1{font-weight:780;letter-spacing:-.04em}
+h1 em{background:linear-gradient(95deg,#f0d59b,#c68cda);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{color:#faf3ff}
+p,.intro{color:#c2b5d0}
+.stat{background:linear-gradient(135deg,#21172f,#141022 66%);border-color:#473556;box-shadow:inset 0 1px 0 #ffffff05,0 10px 26px #0003;position:relative;overflow:hidden}
+.stat:before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,#d7ac68,#8955aa,transparent);opacity:.75}
+.stat span{color:#b8a8cb}.stat strong{color:#f5daaf}.stat small{color:#a89bbd}
+.panel{background:linear-gradient(145deg,#191429 0%,#141021 92%);border:1px solid #40314d;box-shadow:0 6px 35px #0003,inset 0 1px 0 #ffffff06}
+.paneltop{color:#bd9e7d}
+.label{color:#efd19b;background:#422f2a55;border:1px solid #765946;border-radius:5px}
+.actiontiles button{background:linear-gradient(145deg,#2b2240,#1b1530);border-color:#594266;min-height:74px;position:relative;overflow:hidden}
+.actiontiles button:after{content:"";height:2px;width:42%;background:linear-gradient(90deg,#d4ac70,transparent);position:absolute;bottom:0;left:12px}
+.actiontiles button small{color:#b7a6cc}
+.statuslog{background:#0f0c1b;border:1px solid #413254;color:#d9cfe8;border-radius:10px;font:12px/1.7 'Cascadia Code',Consolas,monospace}
+.hint{color:#a99bbb}.divider{border-color:#453450}
+.filter.active{color:#e8c38e;background:#3b2947;border-color:#ad825a}
+#lineChart{background:#120c20;border-color:#3c3055}
+.brow{color:#c4b7d7}.track{background:#2d223f}.fill{background:linear-gradient(90deg,#7b4bb8,#e6c17a)}
+th{background:#231b36;color:#e5cc9d}td{color:#d7cce6;border-bottom-color:#3a2b4b}
+.historyitem{background:#20182f;border:1px solid #4b365a}.historyitem:hover{border-color:#8b6796}
+.secondarybtn{display:inline-flex;text-decoration:none}
+#toast{background:#2b1f3d;color:#f3dfbd;border:1px solid #ad7d58;box-shadow:0 12px 36px #0008}
+/* Showtime */
+.showcase-mode button{background:#261b3d;border-color:#58456e;color:#d6c6ee}
+.showcase-mode button.active{background:#493354;border-color:#d9b27a;color:#f7deaa}
+.showcase-stage{--fx:#edc781;border:1px solid #7d5a78;background:radial-gradient(ellipse at 36% 27%,#392453 0%,#1a1129 49%,#0c0916 100%);box-shadow:0 24px 80px #02010590,inset 0 0 110px #af73ed0b}
+.showcase-stage:before{background-image:linear-gradient(#d9b77910 1px,transparent 1px),linear-gradient(90deg,#bd88e610 1px,transparent 1px)}
+.stage-kicker{color:#f0c991}.stage-head h2{color:#f9f2ff}.stage-head h2 span{color:#e3bb78}
+.stage-status{color:#e8d2b0}.stage-live-dot{background:#edbe77;box-shadow:0 0 15px #e1ba75}
+.canvas-corner{color:#b7a9cc}.canvas-corner span{color:#f1c988}
+.showcase-stats{background:#654b64;border-color:#654b64}
+.showcase-stats>div{background:#21172f}.showcase-stats small{color:#baaccf}.showcase-stats strong{color:#f4d59c}.showcase-stats span{color:#a992c3}
+.stage-footer-head{color:#b6a6c5;border-bottom-color:#514067}
+.showcase-events .event{background:#251b35;border-color:#5b4367}
+.showcase-events .event strong{color:#e4c185}.showcase-events .event span{color:#c5b5d4}
+.showcase-watermark{color:#d8b884}
+.showcase-notes span:before{color:#e3b979}
+@media(max-width:980px){.sidebar{border-right:0;border-bottom:1px solid #63476b}.sidebar:before{height:2px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}button,a.secondarybtn{transition:none}button:hover{transform:none}}
+/* Responsive grid min-content fix: horizontal navigation must not widen the document. */
+@media(max-width:980px){
+ .shell{display:grid;grid-template-columns:minmax(0,1fr);width:100%;max-width:100%}
+ .sidebar,.main{min-width:0;width:100%;max-width:100%}
+ .sidebar nav{min-width:0;width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden}
+ .topbar{min-width:0}
+ .rightbar{gap:8px;min-width:0}
+ .rightbar .pill{max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}
+@media(max-width:520px){.statgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.twocol,.actiontiles{min-width:0}.panel{min-width:0}.stat{min-width:0}.page{max-width:100%}}
